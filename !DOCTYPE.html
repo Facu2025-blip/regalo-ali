@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para mi Ali favorita 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0a1a;
+      color: #f0f0f0;
+      font-family: 'Grenze Gotisch', cursive;
+      padding: 20px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 15px 0;
+      line-height: 1.6em;
+    }
+
+    button {
+      background-color: #1a1a3d;
+      color: white;
+      border: 2px solid #ffffff33;
+      padding: 12px 25px;
+      font-size: 1em;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #2e2e5c;
+    }
+
+    #contenedor-frase {
+      margin-top: 30px;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    #opciones {
+      margin-top: 20px;
+    }
+
+    #mensajeFinal {
+      margin-top: 20px;
+      font-style: italic;
+      color: #cccccc;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Estrellas animadas */
+    .estrella {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: caer 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes caer {
+      from { transform: translateY(0px); }
+      to { transform: translateY(100vh); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5em; }
+      p { font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="estrellas"></div>
+
+  <h1>Un regalo a la distancia para mi Ali favorita 💌</h1>
+
+  <p>
+    Buenos días, tardes o noches, Alisita.  
+    Posiblemente te estés preguntando: “¿Qué carajos es este link?”,  
+    y quizá también estés pensando: “¿Esto tendrá como diez virus?”  
+    Y déjame decirte que sí... ahora tu celular tiene un virus llamado:  
+    <strong>“Te quiero mucho.exe”</strong>   
+  </p>
+
+  <p>
+    Bueno, ahora en serio, Ali: esta página tiene una sola función,  
+    y es hacerte feliz cuando estés triste.  
+    Porque aunque no lo creas, vos te merecés todo lo bonito de este mundo.  
+  </p>
+
+  <p>
+    A falta de plata para ir a verte o mandarte un regalito físico,  
+    decidí hacerte este pequeño regalo digital, a la distancia.  
+    Es como esa cajita que te hice con papelitos para cuando estés mal,  
+    solo que ahora es versión digital (perdón la poca creatividad).  
+  </p>
+
+  <p>
+    Ojalá te guste lo que hice.  
+    Y recordá que te amo mucho, Ali oso. 🐻💛  
+  </p>
+
+  <button onclick="mostrarFrase()">Haz clic para leer tu frase 🌟</button>
+
+  <div id="contenedor-frase" style="display:none;">
+    <p id="frase"></p>
+    <div id="opciones">
+      <p>¿Querés leer otra frase?</p>
+      <button onclick="mostrarFrase()">Sí</button>
+      <button onclick="mostrarFinal()">No</button>
+    </div>
+    <p id="mensajeFinal" style="display:none;">
+      Lo ideal sería que leas poquitas por día, estoy medio seco de creatividad,  
+      pero nunca te olvides que te quiero mucho ❤️
+    </p>
+  </div>
+
+  <script>
+    // La frase fija que siempre aparece la primera vez
+    const fraseFija = "Ali, si el sombrero seleccionador pudiera elegir a una persona especial, te elegiría a vos una y mil veces.";
+
+    // Las demás frases random
+    const frases = [
+      "Si estás leyendo esto, es porque te quiero mucho y quiero que sonrías aunque sea un poquito, se feliz aliii",
+      "A veces no sé qué decirte, pero siempre voy a estar para vos alisita",
+      "Esto no es una frase, tienes que verte one piece o me robare tu tanque de gas.",
+      "Estar lejos no me impide querer abrazarte con palabras, sos increible alisita.",
+      "El cariño que tengo por vos no entra en un mensaje de WhatsApp, por eso te hice una página web.",
+      "Sé que hay días grises, pero vos sos de esos rayitos de sol que aparecen de sorpresa.",
+      "No tengo mucho, pero lo que tengo te lo quiero compartir siempre. Incluso frases random como esta",
+      "Si pudiera hacer algo para que estés feliz siempre, lo haría sin pensarlo... incluso lavar los platos.",
+      "Ali, esto es como un abrazo silencioso. Ojalá te llegue.",
+      "Si lees esta frase quiero que sepas que me quede sin frases para añadirle a esta pagina, le añadiré más frases lo prometo :D"
+    ];
+
+    let primeraVez = true;
+
+    function mostrarFrase() {
+      const contenedor = document.getElementById("contenedor-frase");
+      const fraseEl = document.getElementById("frase");
+      const final = document.getElementById("mensajeFinal");
+
+      let nuevaFrase;
+      if (primeraVez) {
+        nuevaFrase = fraseFija;
+        primeraVez = false;
+      } else {
+        do {
+          nuevaFrase = frases[Math.floor(Math.random() * frases.length)];
+        } while (fraseEl.innerText === nuevaFrase && frases.length > 1);
+      }
+
+      fraseEl.innerText = nuevaFrase;
+      contenedor.style.display = "block";
+      final.style.display = "none";
+    }
+
+    function mostrarFinal() {
+      document.getElementById("mensajeFinal").style.display = "block";
+    }
+
+    // Estrellas animadas
+    const estrellas = document.getElementById("estrellas");
+    for (let i = 0; i < 100; i++) {
+      const estrella = document.createElement("div");
+      estrella.classList.add("estrella");
+      estrella.style.left = Math.random() * 100 + "vw";
+      estrella.style.top = Math.random() * -100 + "vh";
+      estrella.style.animationDuration = (5 + Math.random() * 5) + "s";
+      estrella.style.opacity = Math.random();
+      estrellas.appendChild(estrella);
+    }
+  </script>
+
+</body>
+</html>
